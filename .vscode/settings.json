@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/8d58f99d-2344-48bb-8dd2-d2a9d959e7c4/resourceGroups/nuxt/providers/Microsoft.Web/sites/rayaleonjosecarlos",
+    "appService.deploySubpath": "."
+}
