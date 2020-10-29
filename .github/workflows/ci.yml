@@ -3,12 +3,10 @@ name: ci
 on:
   push:
     branches:
-      - main
-      - master
+      - azure-deploy
   pull_request:
     branches:
-      - main
-      - master
+      - azure-deploy
 
 jobs:
   ci:
