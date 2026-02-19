@@ -6,11 +6,7 @@
           Sobre mí
         </h3>
         <div class="w-1/2 mx-auto md:w-1/4 mb-6 px-4">
-          <img
-            class="rounded-full"
-            :src="require('~/assets/jose-carlos-raya-profile.jpg?webp')"
-            alt="profile-picture"
-          />
+          <img class="rounded-full" :src="profileImage" alt="profile-picture" />
         </div>
         <div class="md:w-3/4 mb-6 px-4 flex items-center text-left flex-wrap">
           <p class="mb-6">
@@ -33,8 +29,15 @@
 </template>
 
 <script>
+import profileImage from '~/assets/jose-carlos-raya-profile.jpg'
+
 export default {
   name: 'About',
+  data() {
+    return {
+      profileImage,
+    }
+  },
   computed: {
     getAge() {
       const today = new Date()

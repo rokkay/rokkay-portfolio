@@ -1,21 +1,17 @@
 module.exports = {
-  future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
-    // },
-    purge: {
-      enabled: false,
-      layers: ['components', 'utilities'],
-      content: ['components/**/*.vue', 'layouts/**/*.vue', 'pages/**/*.vue'],
-    },
-    theme: {
-      extend: {
-        colors: {
-          rokkay: '#345123',
-        },
+  content: [
+    './components/**/*.{vue,js}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './app.vue',
+    './plugins/**/*.{js,ts}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        rokkay: '#345123',
       },
     },
-    variants: {},
-    plugins: [],
   },
+  plugins: [],
 }

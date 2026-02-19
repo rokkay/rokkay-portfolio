@@ -159,6 +159,13 @@
                 <i class="fa fa-paper-plane"></i> Enviar
               </button>
             </div>
+            <p
+              v-if="submitMessage"
+              class="text-white text-sm"
+              :class="statusClass"
+            >
+              {{ submitMessage }}
+            </p>
           </div>
         </form>
 
@@ -216,6 +223,8 @@ export default {
       subject: '',
       email: '',
       message: '',
+      submitMessage: '',
+      submitStatus: '',
       errors: {
         firstName: {
           error: '',
@@ -234,17 +243,6 @@ export default {
         },
       },
     }
-  },
-  computed: {
-    faAt() {
-      return faAt
-    },
-    faMobileAlt() {
-      return faMobileAlt
-    },
-    faTelegram() {
-      return faTelegram
-    },
   },
   watch: {
     firstName(newValue, oldValue) {
@@ -273,15 +271,25 @@ export default {
       }
     },
   },
-  async mounted() {
-    try {
-      await this.$recaptcha.init()
-    } catch (e) {
-      console.error(e)
-    }
+  computed: {
+    faAt() {
+      return faAt
+    },
+    faMobileAlt() {
+      return faMobileAlt
+    },
+    faTelegram() {
+      return faTelegram
+    },
+    statusClass() {
+      return this.submitStatus === 'error' ? 'text-red-300' : 'text-green-300'
+    },
   },
   methods: {
     async checkForm(e) {
+      this.submitMessage = ''
+      this.submitStatus = ''
+
       if (!this.firstName) {
         this.errors.firstName.error = 'El nombre es obligatorio'
       }
@@ -307,35 +315,43 @@ export default {
       if (!isValid) return
 
       try {
-        await this.$recaptcha.execute('login')
-        // console.log('ReCaptcha token:', token)
+        const config = useRuntimeConfig()
+        if (
+          process.client &&
+          window.grecaptcha &&
+          config.public.recaptchaSiteKey
+        ) {
+          await new Promise((resolve) => {
+            window.grecaptcha.ready(resolve)
+          })
+          await window.grecaptcha.execute(config.public.recaptchaSiteKey, {
+            action: 'contact_form',
+          })
+        }
       } catch (e) {
-        console.log('Login error:', e)
+        console.error('Recaptcha error:', e)
       }
 
       try {
-        const info = this.$toast.show('Enviando mensaje...', {
-          position: 'bottom-center',
+        const config = useRuntimeConfig()
+        await $fetch('/SendEmail', {
+          baseURL: config.public.apiBase,
+          method: 'POST',
+          body: {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            subject: this.subject,
+            email: this.email,
+            message: this.message,
+          },
         })
-        await this.$axios.$post('/api/SendEmail', {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          subject: this.subject,
-          email: this.email,
-          message: this.message,
-        })
-
-        info.goAway()
-        this.$toast.success(
-          `${this.firstName} gracias por contactar, reponderé lo antes posible.`,
-          {
-            position: 'bottom-center',
-            duration: 5000,
-          }
-        )
-        await new Promise((resolve) => setTimeout(resolve, 2500))
+        this.submitStatus = 'success'
+        this.submitMessage = `${this.firstName} gracias por contactar, respondere lo antes posible.`
       } catch (e) {
         console.error(e)
+        this.submitStatus = 'error'
+        this.submitMessage =
+          'No se pudo enviar el mensaje. Intentalo de nuevo en unos minutos.'
       }
     },
   },

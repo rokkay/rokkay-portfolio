@@ -1,6 +1,6 @@
 <template>
   <div class="antialiased">
-    <Nuxt />
+    <slot />
   </div>
 </template>
 

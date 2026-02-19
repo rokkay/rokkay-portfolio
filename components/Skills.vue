@@ -148,7 +148,7 @@ import {
   NpmLogo,
   YarnLogo,
   GitHubLogo,
-} from '~/plugins/logos'
+} from '~/utils/logos'
 import Skill from '@/components/Skill'
 
 export default {

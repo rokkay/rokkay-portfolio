@@ -1,6 +1,9 @@
 <template>
   <header class="h-screen">
-    <div class="hero-image h-full bg-center bg-no-repeat bg-cover relative">
+    <div
+      class="hero-image h-full bg-center bg-no-repeat bg-cover relative"
+      :style="heroStyle"
+    >
       <div class="w-full h-full bg-black opacity-25 absolute"></div>
       <div
         class="hero-text h-full justify-center flex flex-col text-center max-w-3xl mx-auto relative z-10"
@@ -34,6 +37,8 @@
 
 <script>
 import { faArrowDown, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import heroBackground from '~/assets/hero-background.jpg'
+
 export default {
   name: 'Header',
   computed: {
@@ -43,12 +48,13 @@ export default {
     faEnvelope() {
       return faEnvelope
     },
+    heroStyle() {
+      return {
+        backgroundImage: `url(${heroBackground})`,
+      }
+    },
   },
 }
 </script>
 
-<style scoped>
-.hero-image {
-  background-image: url('~assets/hero-background.jpg?webp');
-}
-</style>
+<style scoped></style>

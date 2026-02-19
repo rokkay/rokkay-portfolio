@@ -7,19 +7,19 @@
         </h3>
         <div class="divide-y-2 divide-gray-400">
           <Company
-            :logo="require('~/assets/excelentic-logo.png?webp')"
+            :logo="excelenticLogo"
             name="Excelentic"
             timestamp="18/11/2018 - Actualidad"
             description="Excelentic ha sido mi toma real de contacto con el mundo laboral.He pasado por varios proyectos, entre los que hay bastante diversidad: Desarrollo de aplicaciones para móviles con Ionic con backend en Laravel. Páginas web en Drupal 8 con VueJs usando TailwindCSS para el diseño. Juegos móviles multijugador con Unity."
           ></Company>
           <Company
-            :logo="require('~/assets/wapmania-logo.jpg?webp')"
+            :logo="wapmaniaLogo"
             name="Wapmania"
             timestamp="Marzo 2018 - Junio 2018"
             description="Durante mi estancia en Wapmanía estuve desarrollando aplicaciones con el framework de PHP Laravel, además de usar Bootstrap para el diseño. También realicé la documentación de las aplicaciones desarrolladas así como el aporte de nuevas ideas para los proyectos."
           ></Company>
           <Company
-            :logo="require('~/assets/outlet-salud-logo.jpg?webp')"
+            :logo="outletSaludLogo"
             name="Outlet Salud"
             timestamp="Marzo 2015 - Junio 2015"
             description="Mis funciones en Outlet salud fueron la de poner a punto los equipos informáticos así como el desarrollo de páginas web en Wordpress y programación para páginas ya existentes en PHP. También realicé algunas tareas relacionadas con las redes."
@@ -32,9 +32,20 @@
 
 <script>
 import Company from '@/components/Company'
+import excelenticLogo from '~/assets/excelentic-logo.png'
+import wapmaniaLogo from '~/assets/wapmania-logo.jpg'
+import outletSaludLogo from '~/assets/outlet-salud-logo.jpg'
+
 export default {
   name: 'Companies',
   components: { Company },
+  data() {
+    return {
+      excelenticLogo,
+      wapmaniaLogo,
+      outletSaludLogo,
+    }
+  },
 }
 </script>
 
