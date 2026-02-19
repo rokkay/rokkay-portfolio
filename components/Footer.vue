@@ -1,10 +1,10 @@
 <template>
-  <footer>
+  <footer class="bg-slate-950">
     <div
-      class="absolute flex flex-col md:flex-row bg-gray-900 py-4 w-full justify-between leading-10 px-8"
+      class="section-frame flex w-full flex-col items-center justify-between gap-4 py-6 text-center md:flex-row md:text-left"
     >
-      <div class="flex space-x-4 items-center">
-        <span class="text-white text-sm">
+      <div class="flex items-center justify-center md:justify-start">
+        <span class="text-sm leading-relaxed text-white">
           Hecho con
           <font-awesome-icon
             class="text-lg text-red-500 mx-1"
@@ -13,24 +13,26 @@
           por José Carlos Raya León
         </span>
       </div>
-      <div class="flex space-x-4 text-sm justify-center">
+      <div class="flex flex-wrap items-center justify-center gap-3 text-sm">
         <a
           href="https://www.linkedin.com/in/jose-carlos-raya-leon/"
-          aria-label="Github"
-          class="text-white"
+          aria-label="Linkedin"
+          class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1.5 text-white transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
           target="_blank"
+          rel="noopener noreferrer"
         >
           <font-awesome-icon
-            class="text-lg text-blue-700"
+            class="text-lg text-blue-300"
             :icon="faLinkedin"
           ></font-awesome-icon>
-          Linkedin
+          LinkedIn
         </a>
         <a
           href="https://github.com/rokkay"
           aria-label="Github"
-          class="text-white"
+          class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1.5 text-white transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
           target="_blank"
+          rel="noopener noreferrer"
         >
           <font-awesome-icon
             class="text-lg"

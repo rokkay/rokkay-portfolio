@@ -1,117 +1,78 @@
 <template>
-  <section id="skills" class="bg-indigo-900 py-6">
-    <div class="container">
-      <div class="w-full flex flex-wrap px-4">
-        <h3
-          class="font-bold uppercase text-2xl md:text-4xl w-full text-white my-6"
-        >
-          Mis habilidades
-        </h3>
-
-        <h4
-          class="font-bold uppercase text-xl md:text-2xl w-full text-white text-left my-6 border-b-2 border-white"
-        >
-          Lenguajes
-        </h4>
-        <div class="flex flex-wrap justify-around md:justify-start">
-          <Skill name="C#" :level="6" fill="#239120">
-            <CSharpLogo></CSharpLogo>
-          </Skill>
-          <Skill name="PHP" :level="9" fill="#777BB4">
-            <PHPLogo></PHPLogo>
-          </Skill>
-          <Skill name="Java" :level="6" fill="#007396">
-            <JavaLogo></JavaLogo>
-          </Skill>
-          <Skill name="Javascript" :level="6" fill="#F7DF1E">
-            <JavaScriptLogo></JavaScriptLogo>
-          </Skill>
-          <Skill name="Typescript" :level="2" fill="#007ACC">
-            <TypeScriptLogo></TypeScriptLogo>
-          </Skill>
-          <Skill name="HTML" :level="8" fill="#E34F26">
-            <HtmlLogo></HtmlLogo>
-          </Skill>
-          <Skill name="CSS" :level="7" fill="#007ACC">
-            <CssLogo></CssLogo>
-          </Skill>
-          <Skill name="SASS/SCSS" :level="8" fill="#CC6699">
-            <SASSLogo></SASSLogo>
-          </Skill>
+  <section id="skills" class="py-20">
+    <div class="section-frame">
+      <div class="rounded-[2rem] bg-slate-950 px-6 py-10 text-white md:px-10">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300"
+            >
+              Stack y objetivos
+            </p>
+            <h3 class="mt-2 text-3xl font-bold md:text-4xl">
+              Tecnologías con las que construyo y evoluciono productos.
+            </h3>
+          </div>
+          <span
+            class="rounded-full border border-cyan-300/40 bg-cyan-300/10 px-4 py-2 text-sm"
+            >Perfil técnico actualizado</span
+          >
         </div>
 
-        <h4
-          class="font-bold uppercase text-2xl w-full text-white text-left my-6 border-b-2 border-white"
-        >
-          Framekorks
-        </h4>
+        <div class="mt-10 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+          <article class="h-full rounded-3xl border border-white/10 bg-white/5 p-5">
+            <h4 class="text-xl font-bold">Controlo de</h4>
+            <p class="mt-2 text-sm text-slate-300">
+              Tecnologías y herramientas con experiencia profesional
+              consolidada.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <div
+                v-for="skill in masteredSkills"
+                :key="`mastered-${skill.name}`"
+                class="inline-flex items-center gap-2 rounded-full border border-teal-300/30 bg-teal-300/10 px-3 py-2 text-sm"
+              >
+                <component :is="skill.icon" v-if="skill.icon" class="h-4 w-4" />
+                <span>{{ skill.name }}</span>
+              </div>
+            </div>
+          </article>
 
-        <div class="flex flex-wrap justify-around md:justify-start">
-          <Skill name="Laravel" :level="9" fill="#FF2D20">
-            <LaravelLogo></LaravelLogo>
-          </Skill>
-          <Skill name="Bootstrap" :level="7" fill="#563D7C">
-            <BootstrapLogo></BootstrapLogo>
-          </Skill>
-          <Skill name="TailwindCss" :level="9" fill="#38B2AC">
-            <TailwindLogo></TailwindLogo>
-          </Skill>
-          <Skill name="VueJs" :level="7" fill="#4FC08D">
-            <VueLogo></VueLogo>
-          </Skill>
-          <Skill name="NuxtJs" :level="5" fill="#00C58E">
-            <NuxtJsLogo></NuxtJsLogo>
-          </Skill>
-          <Skill name="Angular2+" :level="6" fill="#DD0031">
-            <AngularLogo></AngularLogo>
-          </Skill>
-          <Skill name="Ionic" :level="7" fill="#3880FF">
-            <IonicLogo></IonicLogo>
-          </Skill>
-        </div>
-        <h4
-          class="font-bold uppercase text-2xl w-full text-white text-left my-6 border-b-2 border-white"
-        >
-          Herramientas
-        </h4>
+          <article class="h-full rounded-3xl border border-white/10 bg-white/5 p-5 lg:col-span-2 xl:col-span-1">
+            <h4 class="text-xl font-bold">Quiero trabajar con</h4>
+            <p class="mt-2 text-sm text-slate-300">
+              Próximas apuestas para ampliar impacto técnico y arquitectura
+              distribuida.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <div
+                v-for="skill in targetSkills"
+                :key="`target-${skill.name}`"
+                class="inline-flex items-center gap-2 rounded-full border border-cyan-300/35 bg-cyan-300/10 px-3 py-2 text-sm"
+              >
+                <component :is="skill.icon" v-if="skill.icon" class="h-4 w-4" />
+                <span>{{ skill.name }}</span>
+              </div>
+            </div>
+          </article>
 
-        <div class="flex flex-wrap justify-around md:justify-start">
-          <Skill name="SVN" :level="8" fill="#809CC9">
-            <SVNLogo></SVNLogo>
-          </Skill>
-          <Skill name="Git" :level="4" fill="#F05032">
-            <GitLogo></GitLogo>
-          </Skill>
-          <Skill name="Postman" :level="5" fill="#FF6C37">
-            <PostmanLogo></PostmanLogo>
-          </Skill>
-          <Skill name="Microsoft Teams" :level="8" fill="#6264A7">
-            <MSTeamsLogo></MSTeamsLogo>
-          </Skill>
-          <Skill name="NPM" :level="7" fill="#CB3837">
-            <NpmLogo></NpmLogo>
-          </Skill>
-          <Skill name="YARN" :level="5" fill="#2C8EBB">
-            <YarnLogo></YarnLogo>
-          </Skill>
-          <Skill name="GitHub" :level="4" fill="black">
-            <GitHubLogo></GitHubLogo>
-          </Skill>
-        </div>
-
-        <h4
-          class="font-bold uppercase text-2xl w-full text-white text-left my-6 border-b-2 border-white"
-        >
-          Otros
-        </h4>
-
-        <div class="flex flex-wrap justify-around md:justify-start">
-          <Skill name="Unity" :level="5" fill="#000000">
-            <UnityLogo></UnityLogo>
-          </Skill>
-          <Skill name="Docker" :level="3" fill="#2496ED">
-            <DockerLogo></DockerLogo>
-          </Skill>
+          <article class="h-full rounded-3xl border border-white/10 bg-white/5 p-5">
+            <h4 class="text-xl font-bold">Prefiero no trabajar con</h4>
+            <p class="mt-2 text-sm text-slate-300">
+              Tecnologías fuera de mi foco para maximizar especialización y
+              valor.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <div
+                v-for="skill in avoidSkills"
+                :key="`avoid-${skill.name}`"
+                class="inline-flex items-center gap-2 rounded-full border border-rose-300/35 bg-rose-300/10 px-3 py-2 text-sm"
+              >
+                <component :is="skill.icon" v-if="skill.icon" class="h-4 w-4" />
+                <span>{{ skill.name }}</span>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -119,76 +80,57 @@
 </template>
 
 <script>
-/* eslint-disable */
 import {
-  CSharpLogo,
-  LaravelLogo,
-  DrupalLogo,
-  NodeJSLogo,
-  NETCoreLogo,
-  BootstrapLogo,
-  TailwindLogo,
-  VueLogo,
-  NuxtJsLogo,
   AngularLogo,
-  SASSLogo,
-  UnityLogo,
-  IonicLogo,
-  PHPLogo,
+  DockerLogo,
+  DrupalLogo,
+  GitLogo,
+  GitHubLogo,
   JavaLogo,
   JavaScriptLogo,
-  SVNLogo,
-  MSTeamsLogo,
-  DockerLogo,
-  TypeScriptLogo,
-  GitLogo,
-  PostmanLogo,
-  HtmlLogo,
-  CssLogo,
-  NpmLogo,
-  YarnLogo,
-  GitHubLogo,
+  LaravelLogo,
+  NodeJSLogo,
+  PHPLogo,
+  TailwindLogo,
+  VueLogo,
 } from '~/utils/logos'
-import Skill from '@/components/Skill'
 
 export default {
   name: 'Skills',
-  components: {
-    CSharpLogo,
-    LaravelLogo,
-    DrupalLogo,
-    NodeJSLogo,
-    NETCoreLogo,
-    BootstrapLogo,
-    TailwindLogo,
-    VueLogo,
-    NuxtJsLogo,
-    AngularLogo,
-    SASSLogo,
-    UnityLogo,
-    IonicLogo,
-    PHPLogo,
-    JavaLogo,
-    JavaScriptLogo,
-    SVNLogo,
-    MSTeamsLogo,
-    DockerLogo,
-    TypeScriptLogo,
-    GitLogo,
-    PostmanLogo,
-    HtmlLogo,
-    CssLogo,
-    NpmLogo,
-    YarnLogo,
-    GitHubLogo,
-    Skill,
+  data() {
+    return {
+      masteredSkills: [
+        { name: 'Angular2+', icon: AngularLogo },
+        { name: 'API' },
+        { name: 'Docker', icon: DockerLogo },
+        { name: 'Drupal', icon: DrupalLogo },
+        { name: 'Git', icon: GitLogo },
+        { name: 'GitHub', icon: GitHubLogo },
+        { name: 'JavaScript', icon: JavaScriptLogo },
+        { name: 'Jira' },
+        { name: 'Laravel', icon: LaravelLogo },
+        { name: 'MySQL' },
+        { name: 'PHP', icon: PHPLogo },
+        { name: 'Solr' },
+        { name: 'Symfony' },
+        { name: 'Tailwind', icon: TailwindLogo },
+        { name: 'Twig' },
+        { name: 'Vue', icon: VueLogo },
+        { name: 'Webpack' },
+      ],
+      targetSkills: [
+        { name: 'AWS' },
+        { name: 'Go' },
+        { name: 'Kafka' },
+        { name: 'Keycloak' },
+        { name: 'NodeJS', icon: NodeJSLogo },
+        { name: 'RabbitMQ' },
+        { name: 'Redis' },
+      ],
+      avoidSkills: [{ name: 'Java', icon: JavaLogo }],
+    }
   },
 }
 </script>
 
-<style scoped>
-#skills {
-  background-color: #560c86;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 304 304' width='304' height='304'%3E%3Cpath fill='%23f72585' fill-opacity='0.4' d='M44.1 224a5 5 0 1 1 0 2H0v-2h44.1zm160 48a5 5 0 1 1 0 2H82v-2h122.1zm57.8-46a5 5 0 1 1 0-2H304v2h-42.1zm0 16a5 5 0 1 1 0-2H304v2h-42.1zm6.2-114a5 5 0 1 1 0 2h-86.2a5 5 0 1 1 0-2h86.2zm-256-48a5 5 0 1 1 0 2H0v-2h12.1zm185.8 34a5 5 0 1 1 0-2h86.2a5 5 0 1 1 0 2h-86.2zM258 12.1a5 5 0 1 1-2 0V0h2v12.1zm-64 208a5 5 0 1 1-2 0v-54.2a5 5 0 1 1 2 0v54.2zm48-198.2V80h62v2h-64V21.9a5 5 0 1 1 2 0zm16 16V64h46v2h-48V37.9a5 5 0 1 1 2 0zm-128 96V208h16v12.1a5 5 0 1 1-2 0V210h-16v-76.1a5 5 0 1 1 2 0zm-5.9-21.9a5 5 0 1 1 0 2H114v48H85.9a5 5 0 1 1 0-2H112v-48h12.1zm-6.2 130a5 5 0 1 1 0-2H176v-74.1a5 5 0 1 1 2 0V242h-60.1zm-16-64a5 5 0 1 1 0-2H114v48h10.1a5 5 0 1 1 0 2H112v-48h-10.1zM66 284.1a5 5 0 1 1-2 0V274H50v30h-2v-32h18v12.1zM236.1 176a5 5 0 1 1 0 2H226v94h48v32h-2v-30h-48v-98h12.1zm25.8-30a5 5 0 1 1 0-2H274v44.1a5 5 0 1 1-2 0V146h-10.1zm-64 96a5 5 0 1 1 0-2H208v-80h16v-14h-42.1a5 5 0 1 1 0-2H226v18h-16v80h-12.1zm86.2-210a5 5 0 1 1 0 2H272V0h2v32h10.1zM98 101.9V146H53.9a5 5 0 1 1 0-2H96v-42.1a5 5 0 1 1 2 0zM53.9 34a5 5 0 1 1 0-2H80V0h2v34H53.9zm60.1 3.9V66H82v64H69.9a5 5 0 1 1 0-2H80V64h32V37.9a5 5 0 1 1 2 0zM101.9 82a5 5 0 1 1 0-2H128V37.9a5 5 0 1 1 2 0V82h-28.1zm16-64a5 5 0 1 1 0-2H146v44.1a5 5 0 1 1-2 0V18h-26.1zm102.2 270a5 5 0 1 1 0 2H98v14h-2v-16h124.1zM242 149.9V160h16v34h-16v62h48v48h-2v-46h-48v-66h16v-30h-16v-12.1a5 5 0 1 1 2 0zM53.9 18a5 5 0 1 1 0-2H64V2H48V0h18v18H53.9zm112 32a5 5 0 1 1 0-2H192V0h50v2h-48v48h-28.1zm-48-48a5 5 0 0 1-9.8-2h2.07a3 3 0 1 0 5.66 0H178v34h-18V21.9a5 5 0 1 1 2 0V32h14V2h-58.1zm0 96a5 5 0 1 1 0-2H137l32-32h39V21.9a5 5 0 1 1 2 0V66h-40.17l-32 32H117.9zm28.1 90.1a5 5 0 1 1-2 0v-76.51L175.59 80H224V21.9a5 5 0 1 1 2 0V82h-49.59L146 112.41v75.69zm16 32a5 5 0 1 1-2 0v-99.51L184.59 96H300.1a5 5 0 0 1 3.9-3.9v2.07a3 3 0 0 0 0 5.66v2.07a5 5 0 0 1-3.9-3.9H185.41L162 121.41v98.69zm-144-64a5 5 0 1 1-2 0v-3.51l48-48V48h32V0h2v50H66v55.41l-48 48v2.69zM50 53.9v43.51l-48 48V208h26.1a5 5 0 1 1 0 2H0v-65.41l48-48V53.9a5 5 0 1 1 2 0zm-16 16V89.41l-34 34v-2.82l32-32V69.9a5 5 0 1 1 2 0zM12.1 32a5 5 0 1 1 0 2H9.41L0 43.41V40.6L8.59 32h3.51zm265.8 18a5 5 0 1 1 0-2h18.69l7.41-7.41v2.82L297.41 50H277.9zm-16 160a5 5 0 1 1 0-2H288v-71.41l16-16v2.82l-14 14V210h-28.1zm-208 32a5 5 0 1 1 0-2H64v-22.59L40.59 194H21.9a5 5 0 1 1 0-2H41.41L66 216.59V242H53.9zm150.2 14a5 5 0 1 1 0 2H96v-56.6L56.6 162H37.9a5 5 0 1 1 0-2h19.5L98 200.6V256h106.1zm-150.2 2a5 5 0 1 1 0-2H80v-46.59L48.59 178H21.9a5 5 0 1 1 0-2H49.41L82 208.59V258H53.9zM34 39.8v1.61L9.41 66H0v-2h8.59L32 40.59V0h2v39.8zM2 300.1a5 5 0 0 1 3.9 3.9H3.83A3 3 0 0 0 0 302.17V256h18v48h-2v-46H2v42.1zM34 241v63h-2v-62H0v-2h34v1zM17 18H0v-2h16V0h2v18h-1zm273-2h14v2h-16V0h2v16zm-32 273v15h-2v-14h-14v14h-2v-16h18v1zM0 92.1A5.02 5.02 0 0 1 6 97a5 5 0 0 1-6 4.9v-2.07a3 3 0 1 0 0-5.66V92.1zM80 272h2v32h-2v-32zm37.9 32h-2.07a3 3 0 0 0-5.66 0h-2.07a5 5 0 0 1 9.8 0zM5.9 0A5.02 5.02 0 0 1 0 5.9V3.83A3 3 0 0 0 3.83 0H5.9zm294.2 0h2.07A3 3 0 0 0 304 3.83V5.9a5 5 0 0 1-3.9-5.9zm3.9 300.1v2.07a3 3 0 0 0-1.83 1.83h-2.07a5 5 0 0 1 3.9-3.9zM97 100a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-48 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 96a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-144a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM49 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM33 68a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 240a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm80-176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm112 176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 180a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 84a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'%3E%3C/path%3E%3C/svg%3E");
-}
-</style>
+<style scoped></style>

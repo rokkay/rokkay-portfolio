@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="text-slate-900">
     <Header></Header>
     <main>
       <About></About>
+      <ManfredProfile></ManfredProfile>
       <Skills></Skills>
       <Companies></Companies>
       <Contact></Contact>
@@ -20,13 +21,7 @@ useSeoMeta({
   ogUrl: 'https://victorious-moss-0c2edb703.azurestaticapps.net/',
   ogTitle: 'Portfolio Jose Carlos Raya Leon',
   ogDescription:
-    'Me dedico a la programacion, tanto de sitios web como aplicaciones hibridas. Soy una persona alegre y simpatica. Me apasiona la tecnologia y siempre intento estar a la vanguardia. Dedico mi tiempo libre a los videojuegos, series y peliculas.',
+    'Senior Software Developer especializado en backend PHP con Laravel y Symfony, diseño de APIs REST, arquitectura de software y calidad continua con testing y automatización.',
   ogImage,
 })
 </script>
-
-<style>
-.container {
-  @apply mx-auto flex text-center justify-center;
-}
-</style>

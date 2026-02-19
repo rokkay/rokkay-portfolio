@@ -1,23 +1,29 @@
 <template>
-  <section id="contact" class="py-6 bg-gray-800">
-    <div class="container">
-      <div class="w-full flex flex-wrap px-4">
+  <section id="contact" class="py-20">
+    <div class="section-frame">
+      <div class="w-full px-1 py-2 md:px-2">
         <h3
-          class="font-bold uppercase text-2xl md:text-4xl w-full my-6 text-white"
+          class="font-bold uppercase text-2xl md:text-4xl w-full my-2 text-slate-900"
         >
           Contacto
         </h3>
+        <p class="mb-8 w-full text-sm text-slate-600 md:text-base">
+          Si quieres comentar una oportunidad o un proyecto, estaré encantado de
+          hablar contigo.
+        </p>
 
         <form
-          class="w-full flex flex-wrap justify-around"
+          class="grid w-full grid-cols-1 gap-5 lg:grid-cols-2"
           method="post"
           @submit.prevent="checkForm"
         >
-          <div class="max-w-lg">
+          <div
+            class="w-full rounded-3xl border border-slate-200 bg-white p-4 md:p-6 shadow-lg shadow-slate-200/50"
+          >
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label
-                  class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2"
+                  class="block text-slate-700 text-sm font-semibold mb-2"
                   for="grid-first-name"
                 >
                   Nombre
@@ -30,20 +36,20 @@
                       ? 'border-red-500'
                       : 'border-gray-200'
                   "
-                  class="appearance-none block w-full bg-gray-200 text-gray-800 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white placeholder-gray-900"
+                  class="appearance-none block w-full bg-white text-slate-900 border border-slate-300 rounded-xl py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 placeholder-slate-400"
                   type="text"
-                  placeholder="Jane"
+                  placeholder="Nombre"
                 />
                 <p
                   v-show="errors.firstName.error"
-                  class="text-red-500 text-xs italic"
+                  class="text-red-600 text-xs"
                 >
                   {{ errors.firstName.error }}
                 </p>
               </div>
               <div class="w-full md:w-1/2 px-3">
                 <label
-                  class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2"
+                  class="block text-slate-700 text-sm font-semibold mb-2"
                   for="grid-last-name"
                 >
                   Apellidos
@@ -54,13 +60,13 @@
                   :class="
                     errors.lastName.error ? 'border-red-500' : 'border-gray-200'
                   "
-                  class="appearance-none block w-full bg-gray-200 text-gray-800 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-gray-900"
+                  class="appearance-none block w-full bg-white text-slate-900 border border-slate-300 rounded-xl py-3 px-4 leading-tight focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 placeholder-slate-400"
                   type="text"
-                  placeholder="Doe"
+                  placeholder="Apellidos"
                 />
                 <p
                   v-show="errors.lastName.error"
-                  class="text-red-500 text-xs italic"
+                  class="text-red-600 text-xs"
                 >
                   {{ errors.lastName.error }}
                 </p>
@@ -69,7 +75,7 @@
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full px-3">
                 <label
-                  class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2"
+                  class="block text-slate-700 text-sm font-semibold mb-2"
                   for="grid-subject"
                 >
                   Asunto
@@ -80,13 +86,13 @@
                   :class="
                     errors.subject.error ? 'border-red-500' : 'border-gray-200'
                   "
-                  class="appearance-none block w-full bg-gray-200 text-gray-800 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-gray-900"
+                  class="appearance-none block w-full bg-white text-slate-900 border border-slate-300 rounded-xl py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 placeholder-slate-400"
                   type="text"
                   placeholder="Asunto"
                 />
                 <p
                   v-show="errors.subject.error"
-                  class="text-red-500 text-xs italic"
+                  class="text-red-600 text-xs"
                 >
                   {{ errors.subject.error }}
                 </p>
@@ -95,35 +101,37 @@
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full px-3">
                 <label
-                  class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2"
-                  for="grid-password"
+                  class="block text-slate-700 text-sm font-semibold mb-2"
+                  for="grid-email"
                 >
                   Correo electrónico
                 </label>
                 <input
-                  id="grid-password"
+                  id="grid-email"
                   v-model="email"
                   :class="
                     errors.email.error ? 'border-red-500' : 'border-gray-200'
                   "
-                  class="appearance-none block w-full bg-gray-200 text-gray-800 border-2 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-gray-900"
+                  class="appearance-none block w-full bg-white text-slate-900 border border-slate-300 rounded-xl py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 placeholder-slate-400"
                   type="email"
-                  placeholder="janedoe@mail.com"
+                  placeholder="tuemail@dominio.com"
                 />
                 <p
                   v-show="errors.email.error"
-                  class="text-red-500 text-xs italic"
+                  class="text-red-600 text-xs"
                 >
                   {{ errors.email.error }}
                 </p>
               </div>
             </div>
           </div>
-          <div class="w-full max-w-lg">
+          <div
+            class="w-full rounded-3xl border border-slate-200 bg-white p-4 md:p-6 shadow-lg shadow-slate-200/50"
+          >
             <div class="flex flex-wrap -mx-3 mb-2">
               <div class="w-full px-3">
                 <label
-                  class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2"
+                  class="block text-slate-700 text-sm font-semibold mb-2"
                   for="grid-message"
                 >
                   Mensaje
@@ -137,12 +145,12 @@
                   :class="
                     errors.message.error ? 'border-red-500' : 'border-gray-200'
                   "
-                  class="appearance-none block w-full bg-gray-200 text-gray-800 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 placeholder-gray-900"
+                  class="appearance-none block w-full bg-white text-slate-900 border border-slate-300 rounded-xl py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200 placeholder-slate-400"
                   placeholder="Deja aquí tu mensaje"
                 ></textarea>
                 <p
                   v-show="errors.message.error"
-                  class="text-red-500 text-xs italic"
+                  class="text-red-600 text-xs"
                 >
                   {{ errors.message.error }}
                 </p>
@@ -153,7 +161,7 @@
             </div>
             <div class="mb-2">
               <button
-                class="p-2 rounded-2xl w-1/2 md:w-mx-auto text-white bg-gradient-to-br to-pink-700 from-red-600 hover:shadow-2xl transition-all duration-75"
+                class="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-teal-300 to-cyan-300 px-6 py-3 font-semibold text-slate-950 transition-all duration-150 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
                 type="submit"
               >
                 <i class="fa fa-paper-plane"></i> Enviar
@@ -161,7 +169,7 @@
             </div>
             <p
               v-if="submitMessage"
-              class="text-white text-sm"
+              class="text-sm"
               :class="statusClass"
             >
               {{ submitMessage }}
@@ -170,37 +178,46 @@
         </form>
 
         <div
-          class="flex flex-wrap justify-around max-w-2xl w-full mx-auto mt-12 mb-6 text-gray-500"
+          class="flex flex-wrap justify-around max-w-3xl w-full mx-auto mt-12 mb-2 text-slate-700"
         >
-          <ul class="flex flex-col md:flex-row items-center space-x-4">
-            <li class="mb-3">
-              <a class="flex items-center" href="https://t.me/Rokkay"
-                ><font-awesome-icon
+          <ul class="flex w-full flex-col md:flex-row items-center gap-3 md:gap-6">
+            <li>
+              <a
+                class="flex w-full items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 shadow-sm transition hover:border-slate-300 hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 md:w-auto"
+                href="https://t.me/Rokkay"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <font-awesome-icon
                   class="text-2xl mr-2"
                   :icon="faTelegram"
                 ></font-awesome-icon>
-                Rokkay</a
-              >
+                Rokkay
+              </a>
             </li>
-            <li class="mb-3">
-              <a class="flex items-center" href="tel:638564461">
+            <li>
+              <a
+                class="flex w-full items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 shadow-sm transition hover:border-slate-300 hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 md:w-auto"
+                href="tel:638564461"
+              >
                 <font-awesome-icon
                   class="text-2xl mr-2"
                   :icon="faMobileAlt"
                 ></font-awesome-icon>
-                638 564 461</a
-              >
+                638 564 461
+              </a>
             </li>
-            <li class="mb-3">
+            <li>
               <a
-                class="flex items-center"
+                class="flex w-full items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-center shadow-sm transition hover:border-slate-300 hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 md:w-auto md:text-left"
                 href="mailto:rayaleonjosecarlos@gmail.com"
-                ><font-awesome-icon
+              >
+                <font-awesome-icon
                   class="text-2xl mr-2"
                   :icon="faAt"
                 ></font-awesome-icon>
-                rayaleonjosecarlos@gmail.com</a
-              >
+                <span class="break-all md:break-normal">rayaleonjosecarlos@gmail.com</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -282,7 +299,7 @@ export default {
       return faTelegram
     },
     statusClass() {
-      return this.submitStatus === 'error' ? 'text-red-300' : 'text-green-300'
+      return this.submitStatus === 'error' ? 'text-red-700' : 'text-emerald-700'
     },
   },
   methods: {
@@ -346,12 +363,12 @@ export default {
           },
         })
         this.submitStatus = 'success'
-        this.submitMessage = `${this.firstName} gracias por contactar, respondere lo antes posible.`
+        this.submitMessage = `${this.firstName}, gracias por contactar. Responderé lo antes posible.`
       } catch (e) {
         console.error(e)
         this.submitStatus = 'error'
         this.submitMessage =
-          'No se pudo enviar el mensaje. Intentalo de nuevo en unos minutos.'
+          'No se pudo enviar el mensaje. Inténtalo de nuevo en unos minutos.'
       }
     },
   },
