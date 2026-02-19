@@ -65,43 +65,70 @@ export async function onRequestPost(context) {
       )
     }
 
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        personalizations: [{ to: [{ email: to }] }],
-        from: {
-          email: from,
-          name: 'Formulario de contacto',
+    let apiHost = ''
+    try {
+      apiHost = new URL(apiUrl).host
+    } catch {
+      return json({ ok: false, message: 'MAILCHANNELS_API_URL invalida' }, 500)
+    }
+
+    let response
+    try {
+      response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
         },
-        reply_to: {
-          email,
-          name: `${firstName} ${lastName}`,
-        },
-        subject: `${firstName} ${lastName} - ${subject}`,
-        content: [
-          {
-            type: 'text/plain',
-            value: [
-              `Nombre: ${firstName} ${lastName}`,
-              `Email: ${email}`,
-              `Asunto: ${subject}`,
-              '',
-              message,
-            ].join('\n'),
+        body: JSON.stringify({
+          personalizations: [{ to: [{ email: to }] }],
+          from: {
+            email: from,
+            name: 'Formulario de contacto',
           },
-        ],
-      }),
-    })
+          reply_to: {
+            email,
+            name: `${firstName} ${lastName}`,
+          },
+          subject: `${firstName} ${lastName} - ${subject}`,
+          content: [
+            {
+              type: 'text/plain',
+              value: [
+                `Nombre: ${firstName} ${lastName}`,
+                `Email: ${email}`,
+                `Asunto: ${subject}`,
+                '',
+                message,
+              ].join('\n'),
+            },
+          ],
+        }),
+      })
+    } catch (upstreamError) {
+      return json(
+        {
+          ok: false,
+          message: 'Error llamando a MailChannels',
+          apiHost,
+          details: String(upstreamError?.message || upstreamError),
+        },
+        502,
+      )
+    }
 
     if (!response.ok) {
-      const details = await response.text()
+      let details = ''
+      try {
+        details = await response.text()
+      } catch {
+        details = 'No se pudo leer la respuesta del proveedor de correo'
+      }
+
       return json(
         {
           ok: false,
           message: 'No se pudo enviar el mensaje',
+          apiHost,
           upstreamStatus: response.status,
           details,
         },
