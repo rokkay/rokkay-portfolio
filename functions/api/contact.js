@@ -28,73 +28,96 @@ export async function onRequestOptions() {
 }
 
 export async function onRequestPost(context) {
-  let payload
-
   try {
-    payload = await context.request.json()
-  } catch {
-    return json({ ok: false, message: 'JSON invalido' }, 400)
-  }
+    let payload
 
-  const firstName = clean(payload?.firstName)
-  const lastName = clean(payload?.lastName)
-  const subject = clean(payload?.subject)
-  const email = clean(payload?.email)
-  const message = clean(payload?.message)
+    try {
+      payload = await context.request.json()
+    } catch {
+      return json({ ok: false, message: 'JSON invalido' }, 400)
+    }
 
-  if (!firstName || !lastName || !subject || !email || !message) {
-    return json({ ok: false, message: 'Campos incompletos' }, 400)
-  }
+    const firstName = clean(payload?.firstName)
+    const lastName = clean(payload?.lastName)
+    const subject = clean(payload?.subject)
+    const email = clean(payload?.email)
+    const message = clean(payload?.message)
 
-  if (!isValidEmail(email)) {
-    return json({ ok: false, message: 'Email invalido' }, 400)
-  }
+    if (!firstName || !lastName || !subject || !email || !message) {
+      return json({ ok: false, message: 'Campos incompletos' }, 400)
+    }
 
-  const to = clean(context.env.CONTACT_TO)
-  const from = clean(context.env.CONTACT_FROM)
-  const apiUrl =
-    clean(context.env.MAILCHANNELS_API_URL) ||
-    'https://api.mailchannels.net/tx/v1/send'
+    if (!isValidEmail(email)) {
+      return json({ ok: false, message: 'Email invalido' }, 400)
+    }
 
-  if (!to || !from) {
-    return json({ ok: false, message: 'Configuracion de email incompleta' }, 500)
-  }
+    const env = context.env || {}
+    const to = clean(env.CONTACT_TO)
+    const from = clean(env.CONTACT_FROM)
+    const apiUrl =
+      clean(env.MAILCHANNELS_API_URL) ||
+      'https://api.mailchannels.net/tx/v1/send'
 
-  const response = await fetch(apiUrl, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      personalizations: [{ to: [{ email: to }] }],
-      from: {
-        email: from,
-        name: 'Formulario de contacto',
+    if (!to || !from) {
+      return json(
+        { ok: false, message: 'Configuracion de email incompleta' },
+        500,
+      )
+    }
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
       },
-      reply_to: {
-        email,
-        name: `${firstName} ${lastName}`,
-      },
-      subject: `${firstName} ${lastName} - ${subject}`,
-      content: [
-        {
-          type: 'text/plain',
-          value: [
-            `Nombre: ${firstName} ${lastName}`,
-            `Email: ${email}`,
-            `Asunto: ${subject}`,
-            '',
-            message,
-          ].join('\n'),
+      body: JSON.stringify({
+        personalizations: [{ to: [{ email: to }] }],
+        from: {
+          email: from,
+          name: 'Formulario de contacto',
         },
-      ],
-    }),
-  })
+        reply_to: {
+          email,
+          name: `${firstName} ${lastName}`,
+        },
+        subject: `${firstName} ${lastName} - ${subject}`,
+        content: [
+          {
+            type: 'text/plain',
+            value: [
+              `Nombre: ${firstName} ${lastName}`,
+              `Email: ${email}`,
+              `Asunto: ${subject}`,
+              '',
+              message,
+            ].join('\n'),
+          },
+        ],
+      }),
+    })
 
-  if (!response.ok) {
-    const details = await response.text()
-    return json({ ok: false, message: 'No se pudo enviar el mensaje', details }, 502)
+    if (!response.ok) {
+      const details = await response.text()
+      return json(
+        {
+          ok: false,
+          message: 'No se pudo enviar el mensaje',
+          upstreamStatus: response.status,
+          details,
+        },
+        502,
+      )
+    }
+
+    return json({ ok: true })
+  } catch (error) {
+    return json(
+      {
+        ok: false,
+        message: 'Error interno de la function',
+        details: String(error?.message || error),
+      },
+      500,
+    )
   }
-
-  return json({ ok: true })
 }
