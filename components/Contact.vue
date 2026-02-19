@@ -351,8 +351,9 @@ export default {
 
       try {
         const config = useRuntimeConfig()
-        await $fetch('/SendEmail', {
-          baseURL: config.public.apiBase,
+        const endpoint = config.public.contactEndpoint || '/api/contact'
+
+        await $fetch(endpoint, {
           method: 'POST',
           body: {
             firstName: this.firstName,

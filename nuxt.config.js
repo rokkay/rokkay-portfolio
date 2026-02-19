@@ -37,11 +37,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase:
-        process.env.NUXT_PUBLIC_API_BASE ||
-        (process.env.NODE_ENV === 'development'
-          ? 'http://localhost:7071/api'
-          : 'https://www.rayaleonjosecarlos.com/api'),
+      contactEndpoint:
+        process.env.NUXT_PUBLIC_CONTACT_ENDPOINT || '/api/contact',
       recaptchaSiteKey,
     },
   },
